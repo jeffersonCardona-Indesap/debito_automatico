@@ -1,0 +1,97 @@
+<div class="content">
+
+  <div class="header headerBtns">
+    <button class="addBtn">
+      Agregar Empresa
+    </button>
+    <button class="addBtn">
+      Clientes
+    </button>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="tableStyle" scope="col">Id</th>
+        <th class="tableStyle" scope="col">Name</th>
+        <th class="tableStyle" scope="col">Age</th>
+        <th class="tableStyle" scope="col">Address</th>
+        <th class="tableStyle" scope="col">Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(table of firstTable; track $index){
+      <tr>
+        <td class="colWidth tableStyle" scope="row">{{$index}}</td>
+        <td class="colWidth tableStyle">{{table.name}}</td>
+        <td class="colWidth tableStyle">{{table.age}}</td>
+        <td class="colWidth tableStyle">{{table.address}}</td>
+        <td class="colWidth tableStyle">
+          <button class="btn btn-primary">Configurar Fecha</button>
+          <button class="btn btn-danger" (click)="goToClients(table)">Colaboradores</button>
+          <button class="btn btn-secondary">Editar</button>
+          <button class="btn btn-info"> Eliminar</button>
+      </tr>
+      }
+    </tbody>
+  </table>
+
+  <!-- Date picker -->
+
+  <div>
+    <h1> date picker</h1>
+    <form class="row row-cols-sm-auto">
+      <div class="col-12">
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker
+            #d="ngbDatepicker" />
+          <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
+        </div>
+      </div>
+    </form>
+
+    <hr />
+    <pre>Model: {{ model | json }}</pre>
+
+    <ngb-alert class="mt-3 mb-0" type="info" [dismissible]="false">
+      You must provide the icon for the button that matches your application's style. In this example, the icon comes
+      from
+      <code>bootstrap-icons</code>.
+    </ngb-alert>
+
+  </div>
+
+  <!-- Modal -->
+
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+  </button>
+
+  <!-- Modal -->
+
+
+
+
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
