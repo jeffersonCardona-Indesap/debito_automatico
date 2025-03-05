@@ -1,0 +1,101 @@
+<!-- This is the html file for the add-update-company component. This component is used to create, update and change the cut-off date of a company. -->
+
+<app-alerts [messageType]="messageType" [messageContent]="messageContent"></app-alerts>
+
+<div *ngIf="btnType === 'create'">
+  <div class="col d-flex justify-content-end">
+      <button class="addBtn" (click)="open(addCompanyModal)">
+          Agregar Empresa
+          <i class="bi bi-plus-circle"></i>
+      </button>
+  </div>
+</div>
+
+<button *ngIf="btnType === 'update'" (click)="open(addCompanyModal)" class="roundBtn green_bgd" ngbTooltip="Editar Empresa" placement="top">
+  <i class="bi bi-pen"></i>
+</button>
+
+<button *ngIf="btnType === 'changeDate'" (click)="open(addCompanyModal)" class="roundBtn white_bgd" ngbTooltip="Cambiar Fecha de Corte" placement="top">
+  <i class="bi bi-calendar3"></i>
+</button>
+
+<ng-template #addCompanyModal let-modal>
+    <div #addCompanyModal class="modal-content" >
+      <div class="modal-header">
+          <span *ngIf="btnType === 'create'">Añadir Empresa</span>
+          <span *ngIf="btnType === 'update'">Editar Empresa</span>
+          <span *ngIf="btnType === 'changeDate'">Cambiar Fecha de corte</span>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')"></button>
+      </div>
+      <div class="modal-body">
+          <form [formGroup]="companyForm" (ngSubmit)="onSubmit()">
+            <div *ngIf="btnType ==='changeDate'">
+              <p>
+                Por favor seleccione la nueva fecha de corte para
+                <strong>
+                  {{company.nombreEmpresa}}
+                </strong>
+              </p>
+            </div>
+            <div *ngIf="btnType !=='changeDate'">
+              <label for="nombreEmpresa">Nombre Empresa</label> <br>
+              <input id="nombreEmpresa" formControlName="nombreEmpresa" type="text" style="width: 100%;"> <br>
+              <div *ngIf="formControls['nombreEmpresa'].invalid && formControls['nombreEmpresa'].touched" class="text-danger">
+                <span>
+                  Nombre Empresa es requerido con mínimo 3 caracteres.
+                </span>
+              </div>
+            </div>
+            <div *ngIf="btnType !=='changeDate'">
+              <label for="nit">NIT</label> <br>
+              <input id="nit" formControlName="nit" type="text"  style="width: 100%;"
+                [disabled]="btnType !== 'create'" [readonly]="btnType !=='create'"/>
+               <br>
+              <div *ngIf="formControls['nit'].invalid && formControls['nit'].touched" class="text-danger">
+                <span>
+                  El NIT es un valor númerico requerido
+                </span>
+              </div>
+            </div>
+            <div *ngIf="btnType !=='changeDate'">
+              <label for="codGrupo">Código Grupo</label> <br>
+              <input id="codGrupo" formControlName="codGrupo" type="text" style="width: 100%;"> <br>
+              <div *ngIf="formControls['codGrupo'].invalid && formControls['codGrupo'].touched" class="text-danger">
+                <span>
+                  El código de grupo es requerido.
+                </span>
+              </div>
+            </div>
+            <div>
+              <label for="fechaCorte">Fecha Corte</label> <br>
+              <div class="input-group">
+                <input
+                  style="width: 92%; border-radious: 4px;"
+                  formControlName="fechaCorte"
+                  placeholder="aaaa-mm-dd"
+                  name="dp"
+                  [(ngModel)]="model"
+                  ngbDatepicker
+                  #d="ngbDatepicker"
+                />
+                <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button" style="width: 8%; border-radius: 4px;"></button> <br>
+
+              </div>
+              <div *ngIf="formControls['fechaCorte'].invalid && formControls['fechaCorte'].touched" class="text-danger">
+                <span>
+                  La fecha de corte es requerida.
+                </span>
+              </div>
+            </div>
+            <br>
+            <div class="modal-footer">
+              <div class="d-flex justify-content-end">
+                <button type="button" class="red_bgd roundBtn" (click)="modal.close('Close click')">Cancelar</button>
+                <button class="green_bgd roundBtn" type="submit">{{ btnType === 'create' ? 'Crear' : 'Actualizar' }}
+              </button>
+              </div>
+            </div>
+          </form>
+      </div>
+  </div>
+</ng-template>

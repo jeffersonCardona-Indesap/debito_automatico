@@ -1,0 +1,213 @@
+<div class="content">
+  <div class="d-flex justify-content-between">
+    <div class="">
+      <h2>Clientes</h2>
+    </div>
+    <div class="">
+      <button class="downloadBtn" ngbTooltip="Exportar a CSV" placement="top" (click)="exportar()">Descargar <i class="bi bi-filetype-csv"></i></button>
+    </div>
+
+  </div>
+
+  <div class="tableContent">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="tableStyle text-wrap" scope="col"></th>
+          <th class="tableStyle text-wrap" scope="col">Tipo Documento</th>
+          <th class="tableStyle text-wrap" scope="col">Documento</th>
+          <th class="tableStyle text-wrap" scope="col">Tipo Matricula</th>
+          <th class="tableStyle text-wrap" scope="col">Cuenta Origen</th>
+          <th class="tableStyle text-wrap" scope="col">Cod. Banco Beneficiario</th>
+          <th class="tableStyle text-wrap" scope="col">Cuenta Beneficiario</th>
+          <th class="tableStyle text-wrap" scope="col">Tipo ID Beneficiario</th>
+          <th class="tableStyle text-wrap" scope="col">ID Beneficiario</th>
+          <th class="tableStyle text-wrap" scope="col">Nombre Beneficiario</th>
+          <th class="tableStyle text-wrap" scope="col">Alias Beneficiario</th>
+          <th class="tableStyle text-wrap" scope="col">Fecha Corte Beneficiario</th>
+          <th class="tableStyle text-wrap" scope="col">Tipo Cuenta Beneficiario</th>
+          <th class="tableStyle text-wrap" scope="col">Estado Cuenta Beneficiario</th>
+        </tr>
+      </thead>
+      <thead>
+        <tr>
+          <th></th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Tipo Documento" [(ngModel)]="search.searchTipoDocumento"
+                (keydown.enter)="searchClients()" />
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Tipo Documento" [(ngModel)]="search.searchDocumento"
+                (keydown.enter)="searchClients()" />
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Documento" [(ngModel)]="search.searchTipoMatricula"
+                (keydown.enter)="searchClients()" />
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Cuenta Origen" [(ngModel)]="search.searchCuentaOrigen"
+                (keydown.enter)="searchClients()" />
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Cod. Banco Beneficiario"
+                [(ngModel)]="search.searchCodigoBancoBeneficiario" (keydown.enter)="searchClients()" />
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Cuenta Beneficiario"
+                [(ngModel)]="search.searchCuentaBeneficiario" (keydown.enter)="searchClients()" />
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Tipo ID Beneficiario"
+                [(ngModel)]="search.searchTipoIdBeneficiario" (keydown.enter)="searchClients()" />
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="ID Beneficiario" [(ngModel)]="search.searchIdBeneficiario"
+                (keydown.enter)="searchClients()" />
+            </div>
+          </th>
+          <th>
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Alias Beneficiario"
+                [(ngModel)]="search.searchAliasBeneficiario" (keydown.enter)="searchClients()" />
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Nombre Beneficiario"
+                [(ngModel)]="search.searchNombreBeneficiario" (keydown.enter)="searchClients()" />
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar input-group">
+              <input
+                style="border-radious: 4px;"
+                type="text"
+                class="form-control"
+                placeholder="aaaa-mm-dd"
+                [(ngModel)]="model"
+                (keydown.enter)="searchClients()"
+                ngbDatepicker #d="ngbDatepicker" />
+
+                <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()"      type="button"
+                style="border-radius: 4px;"></button>
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Tipo Cuenta Beneficiario"
+                [(ngModel)]="search.searchTipoCuentaBeneficiario" (keydown.enter)="searchClients()" />
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Estado Cuenta Beneficiario"
+                [(ngModel)]="search.searchEstadoCuentaBeneficiario" (keydown.enter)="searchClients()" />
+            </div>
+          </th>
+
+        </tr>
+      </thead>
+      <tbody>
+        @for(client of clients; track $index){
+        <tr>
+          <th scope="row">
+            <button class="roundBtn red_bgd" (click)="goToHistory(client)" ngbTooltip="Historial de Transacciones">
+              <i class="bi bi-journal-text"></i>
+            </button>
+          </th>
+          <td class="colWidth tableStyle">{{client.tipo_documento}}</td>
+          <td class="colWidth tableStyle">{{client.documento}}</td>
+          @if(client.tipo_matricula === '1'){
+            <td class="colWidth tableStyle">Crédito</td>
+          } @else if(client.tipo_matricula === '2'){
+            <td class="colWidth tableStyle">Débito Automático</td>
+          } @else if(client.tipo_matricula === '3'){
+            <td class="colWidth tableStyle">Cuenta Maestra</td>
+          } @else{
+            <td class="colWidth tableStyle">AFC</td>
+          }
+          <!-- <td class="colWidth tableStyle">{{client.tipo_matricula}}</td> -->
+          <td class="colWidth tableStyle">{{client.cuenta_origen}}</td>
+          <td class="colWidth tableStyle">{{client.codigo_banco_beneficiario}}</td>
+          <td class="colWidth tableStyle">{{client.cuenta_beneficiario}}</td>
+          <td class="colWidth tableStyle">{{client.tipo_id_beneficiario}}</td>
+          <td class="colWidth tableStyle">{{client.id_beneficiario}}</td>
+          <td class="colWidth tableStyle">{{client.nombre_beneficiario}}</td>
+          <td class="colWidth tableStyle">{{client.alias_beneficiario}}</td>
+          <td class="colWidth tableStyle">{{client.fecha_corte_beneficiario | date:"yyyy-MM-dd"}}</td>
+          @if(client.tipo_cuenta_beneficiario === '1'){
+            <td class="colWidth tableStyle">Corriente</td>
+          } @else {
+            <td class="colWidth tableStyle">Ahorros</td>
+          }
+          <!-- <td class="colWidth tableStyle">{{client.tipo_cuenta_beneficiario}}</td> -->
+           @if(client.estado_cuenta_beneficiario === '0'){
+            <td class="colWidth tableStyle">Pendiente</td>
+          } @else if(client.estado_cuenta_beneficiario === '1'){
+            <td class="colWidth tableStyle">Habilitada</td>
+          } @else if(client.estado_cuenta_beneficiario === '2'){
+            <td class="colWidth tableStyle">Inhabilitada</td>
+          } @else{
+            <td class="colWidth tableStyle">Sin prenotificación ACH</td>
+          }
+          <!-- <td class="colWidth tableStyle">{{client.estado_cuenta_beneficiario}}</td> -->
+
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- Paginador -->
+<div class="d-flex justify-content-end" style="padding: 0px 24px 0px 24px">
+  <div class="paginatorStyle">
+    <br>
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link" (click)="changePage(currentPage - 1)" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
+          <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <a class="page-link" (click)="changePage(currentPage + 1)" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="paginatorStyle">
+    <label for="itemsPerPage">
+      <span>Registros por página:</span>
+    </label>
+    <select id="itemsPerPage" class="form-control" [(ngModel)]="itemsPerPage"
+      (change)="changeItemsPerPage(itemsPerPage)">
+      <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+    </select>
+  </div>
+</div>
+
+<!--  -->
+
+

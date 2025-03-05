@@ -1,0 +1,280 @@
+<div class="content">
+  <div class="d-flex justify-content-between">
+    <div class="">
+      <h3>Historial de Débitos</h3>
+    </div>
+    <div class="">
+      <button class="downloadBtn" ngbTooltip="Exportar a CSV" placement="top" (click)="exportToCSV()">Descargar <i class="bi bi-filetype-csv"></i>
+      </button>
+    </div>
+  </div>
+  <div class="tableContent">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="colWidth tableStyle" colspan="7"></th>
+          <th class="colWidth tableStyle" colspan="6">Datos Operación</th>
+          <th class="colWidth tableStyle" colspan="6">Datos Operación: Origen</th>
+          <th class="colWidth tableStyle" colspan="6">Datos Operación: Destino</th>
+      </thead>
+      <thead>
+        <tr>
+          <th class="colWidth tableStyle text-wrap">Message ID</th>
+          <th class="colWidth tableStyle text-wrap">Timestamp</th>
+          <th class="colWidth tableStyle text-wrap">Status</th>
+          <th class="colWidth tableStyle text-wrap">Errors</th>
+          <th class="colWidth tableStyle text-wrap">Error Type</th>
+          <th class="colWidth tableStyle text-wrap">Path</th>
+          <th class="colWidth tableStyle text-wrap">Message</th>
+          <th class="colWidth tableStyle text-wrap">trxID</th>
+          <th class="colWidth tableStyle text-wrap">Channel</th>
+          <th class="colWidth tableStyle text-wrap">Request ID to Reverse</th>
+          <th class="colWidth tableStyle text-wrap">Reverse</th>
+          <th class="colWidth tableStyle text-wrap">Date</th>
+          <th class="colWidth tableStyle text-wrap">Total Amount</th>
+          <th class="colWidth tableStyle text-wrap">Customer Name</th>
+          <th class="colWidth tableStyle text-wrap">Customer Type</th>
+          <th class="colWidth tableStyle text-wrap">Customer Identification</th>
+          <th class="colWidth tableStyle text-wrap">Bank ID</th>
+          <th class="colWidth tableStyle text-wrap">Account Type</th>
+          <th class="colWidth tableStyle text-wrap">Account Number</th>
+          <th class="colWidth tableStyle text-wrap">Customer Name (Destination)</th>
+          <th class="colWidth tableStyle text-wrap">Customer Type (Destination)</th>
+          <th class="colWidth tableStyle text-wrap">Customer Identification (Destination)</th>
+          <th class="colWidth tableStyle text-wrap">Bank ID (Destination)</th>
+          <th class="colWidth tableStyle text-wrap">Account Type (Destination)</th>
+          <th class="colWidth tableStyle text-wrap">Account Number (Destination)</th>
+        </tr>
+      </thead>
+      <thead>
+        <!-- Search fields section -->
+        <tr>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Message ID" [(ngModel)]="searchParam.searchMessageId"
+                (keydown)="searchFun($event)">
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar input-group">
+              <input style="border-radious: 4px;" type="text" class="form-control" placeholder="aaaa-mm-dd"
+                [(ngModel)]="model" (keydown)="searchFun($event)" ngbDatepicker #d="ngbDatepicker" />
+              <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"
+                style="border-radius: 4px;"></button>
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Status" [(ngModel)]="searchParam.searchStatus"
+                (keydown)="searchFun($event)">
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Errors" [(ngModel)]="searchParam.searchErrors"
+                (keydown)="searchFun($event)">
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Error Type" [(ngModel)]="searchParam.searchErrorType"
+                (keydown)="searchFun($event)">
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Path" [(ngModel)]="searchParam.searchPath"
+                (keydown)="searchFun($event)">
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Message" [(ngModel)]="searchParam.searchMessage"
+                (keydown)="searchFun($event)">
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="trxID" [(ngModel)]="searchParam.searchOPDataTrxID"
+                (keydown)="searchFun($event)">
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Channel"
+                [(ngModel)]="searchParam.searchOPDataChannel" (keydown)="searchFun($event)">
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Request ID to Reverse"
+                [(ngModel)]="searchParam.searchOPDataRequestId_to_reverse" (keydown)="searchFun($event)">
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Reverse"
+                [(ngModel)]="searchParam.searchOPDataReverse" (keydown)="searchFun($event)">
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar input-group">
+              <input style="border-radious: 4px;"
+                type="text" class="form-control"
+                placeholder="aaaa-mm-dd"
+                [(ngModel)]="model2"
+                (keydown)="searchFun($event)"
+                ngbDatepicker #d2="ngbDatepicker" />
+              <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d2.toggle()" type="button"
+                style="border-radius: 4px;"></button>
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Total Amount"
+                [(ngModel)]="searchParam.searchOPDataTotalAmount" (keydown)="searchFun($event)">
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Customer Name"
+                [(ngModel)]="searchParam.searchOPDataOriginCustomerName" (keydown)="searchFun($event)">
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Customer Type"
+                [(ngModel)]="searchParam.searchOPDataOriginCustomerType" (keydown)="searchFun($event)">
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Customer Identification"
+                [(ngModel)]="searchParam.searchOPDataOriginIdentification" (keydown)="searchFun($event)">
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Bank ID"
+                [(ngModel)]="searchParam.searchOPDataOriginBankID" (keydown)="searchFun($event)">
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Account Type"
+                [(ngModel)]="searchParam.searchOPDataOriginAccountType" (keydown)="searchFun($event)">
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Account Number"
+                [(ngModel)]="searchParam.searchOPDataOriginAccountNumber" (keydown)="searchFun($event)">
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Customer Name (Destination)"
+                [(ngModel)]="searchParam.searchOPDataDestinationCustomerName" (keydown)="searchFun($event)">
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Customer Type (Destination)"
+                [(ngModel)]="searchParam.searchOPDataDestinationCustomerType" (keydown)="searchFun($event)">
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Customer Identification (Destination)"
+                [(ngModel)]="searchParam.searchOPDataDestinationIdentification" (keydown)="searchFun($event)">
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Bank ID (Destination)"
+                [(ngModel)]="searchParam.searchOPDataDestinationBankID" (keydown)="searchFun($event)">
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Account Type (Destination)"
+                [(ngModel)]="searchParam.searchOPDataDestinationAccountType" (keydown)="searchFun($event)">
+            </div>
+          </th>
+          <th class="colWidth tableStyle">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Account Number (Destination)"
+                [(ngModel)]="searchParam.searchOPDataDestinationAccountNumber" (keydown)="searchFun($event)">
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(transaction of transactions; track $index){
+        <tr>
+          <td class="colWidth tableStyle">{{ transaction.messageId }}</td>
+          <td class="colWidth tableStyle">{{ transaction.timestamp | date : 'yyyy-MM-dd' }}</td>
+          <td class="colWidth tableStyle">{{ transaction.status }}</td>
+          <td class="colWidth tableStyle">{{ transaction.errors.join(', ') }}</td>
+          <td class="colWidth tableStyle">{{ transaction.errorType }}</td>
+          <td class="colWidth tableStyle">{{ transaction.path }}</td>
+          <td class="colWidth tableStyle">{{ transaction.message }}</td>
+          <td class="colWidth tableStyle">{{ transaction.operationData.trxID }}</td>
+          <td class="colWidth tableStyle">{{ transaction.operationData.channel }}</td>
+          <td class="colWidth tableStyle">{{ transaction.operationData.requestId_to_reverse }}</td>
+          <td class="colWidth tableStyle">{{ transaction.operationData.reverse }}</td>
+          <td class="colWidth tableStyle">{{ transaction.operationData.date | date : 'yyyy-MM-dd'}}</td>
+          <td class="colWidth tableStyle">{{ transaction.operationData.totalAmount | currency: "COP" }}</td>
+          <td class="colWidth tableStyle">{{ transaction.operationData.origin.CustomerName }}</td>
+          <td class="colWidth tableStyle">{{ transaction.operationData.origin.CustomerType }}</td>
+          <td class="colWidth tableStyle">{{ transaction.operationData.origin.CustomerIdentification }}</td>
+          <td class="colWidth tableStyle">{{ transaction.operationData.origin.bankID }}</td>
+          <td class="colWidth tableStyle">{{ transaction.operationData.origin.accountType }}</td>
+          <td class="colWidth tableStyle">{{ transaction.operationData.origin.accountNumber }}</td>
+          <td class="colWidth tableStyle">{{ transaction.operationData.destination.CustomerName }}</td>
+          <td class="colWidth tableStyle">{{ transaction.operationData.destination.CustomerType }}</td>
+          <td class="colWidth tableStyle">{{ transaction.operationData.destination.CustomerIdentification }}</td>
+          <td class="colWidth tableStyle">{{ transaction.operationData.destination.bankID }}</td>
+          <td class="colWidth tableStyle">{{ transaction.operationData.destination.accountType }}</td>
+          <td class="colWidth tableStyle">{{ transaction.operationData.destination.accountNumber }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+
+<div class="d-flex justify-content-end" style="padding: 0px 24px 0px 24px">
+  <div class="paginatorStyle">
+    <br>
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link" (click)="changePage(currentPage - 1)" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
+          <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <a class="page-link" (click)="changePage(currentPage + 1)" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="paginatorStyle">
+      <label for="itemsPerPage">
+        <span>Registros por página:</span>
+      </label>
+      <select id="itemsPerPage" class="form-control" [(ngModel)]="itemsPerPage"
+        (change)="changeItemsPerPage(itemsPerPage)">
+        <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+      </select>
+  </div>
+</div>
+

@@ -1,0 +1,158 @@
+/* You can add global styles to this file, and also import other style files */
+.red_bgd{
+  background-color: #D62429;
+}
+
+.green_bgd{
+  background-color: #008E4F;
+}
+
+.gray_bgd{
+  background-color: #58585A;
+}
+
+.white_bgd{
+  background-color: white;
+  border: 1px solid #D62429 !important;
+  color: #D62429 !important;
+}
+/* Estilos generales  */
+.green_txt{
+  color: #008E4F;
+}
+
+.red_txt{
+  color: #D62429;
+}
+
+.gray_txt{
+  color: #58585A;
+}
+
+.white_txt{
+  color: white;
+}
+
+.txt_title{
+  color: white;
+  padding: 8px;
+}
+
+.colWidth{
+  width: 150px;
+}
+
+.searchBar{
+  margin: 10px 0px 10px 0px;
+}
+
+.paginator{
+  margin: 10px 0px 10px 0px;
+}
+
+.paginatorStyle{
+  margin: 4px;
+}
+
+a{
+  color: #58585A !important;
+}
+
+a:hover{
+  color: #ffffff !important;
+  background-color: rgb(0, 142, 79, 0.8) !important;
+}
+
+li.page-item.active .page-link{
+  background-color: #008E4F !important;
+  border-color: #008E4F !important;
+  color: white !important;
+}
+
+ul.pagination{
+    justify-content: flex-end;
+}
+
+.tableContent{
+  margin-top: 20px;
+  border: 1px solid #909090;
+  border-radius: 8px;
+  padding: 4px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.tableStyle{
+  text-align: left;
+  align-content: center;
+}
+.header{
+  text-align: center;
+  align-content: center;
+}
+
+.content{
+  padding:24px;
+  text-align: center;
+}
+
+.modal-dialog.modal-lg{
+  padding: 0px 100px 0px 100px;
+}
+
+input{
+  border-radius: 4px;
+  border: 0.5px solid #6b6b6b;
+  margin-top: 8px;
+}
+/* Botones */
+.roundBtn{
+  border-radius: 20px;
+  color: white;
+  font-weight: 300;
+  min-width: 30px;
+  min-height: 30px;
+  border: none;
+  margin: 8px;
+}
+
+.roundBtn:hover{
+  transform: scale(1.05);
+}
+
+.addBtn{
+  text-align: center;
+  padding: 8px;
+  border-radius: 20px;
+  background-color: #D62429;
+  color: white;
+  font-weight: 300;
+  border: none;
+  width: 200px;
+  min-width: 150px;
+  margin: 4px;
+}
+
+.addBtn:hover{
+  background-color: #D62429;
+  transform: scale(1.05);
+}
+
+.downloadBtn{
+  text-align: center;
+  padding: 8px;
+  border-radius: 20px;
+  background-color: #008E4F;
+  color: white;
+  font-weight: 300;
+  border: none;
+  min-width: 150px;
+  margin: 4px;
+}
+
+/* Other styles */
+.popUp{
+  z-index: 1000;
+  position: fixed;
+
+}

@@ -1,0 +1,79 @@
+@if(permission){
+<div class="content">
+  <div class="d-flex justify-content-end">
+    <div class="header headerBtns">
+      <app-add-update-company [btnType]="'create'" (companyCreated)="getAllCompanies()"></app-add-update-company>
+      <button class="addBtn" (click)="goToAllClients($event)">
+        Clientes
+      </button>
+      <button class="downloadBtn" ngbTooltip="Exportar a CSV" placement="top" (click)="exportar()">Descargar <i class="bi bi-filetype-csv"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="tableContent">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="tableStyle" scope="col">Acciones</th>
+          <th class="colWidth tableStyle" scope="col">Nombre</th>
+          <th class="colWidth tableStyle" scope="col">NIT</th>
+          <th class="colWidth tableStyle" scope="col">Cod. Grupo</th>
+          <th class="colWidth tableStyle" scope="col">Fecha Corte</th>
+        </tr>
+      </thead>
+      <thead>
+        <tr>
+          <th class="tableStyle" scope="col"></th>
+          <th class="colWidth tableStyle" scope="col">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Nombre"
+                [(ngModel)]="searchCompaniesFilter.searchNombreEmpresa" (keydown.enter)="searchCompanies()">
+            </div>
+          </th>
+          <th class="colWidth tableStyle" scope="col">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="NIT" [(ngModel)]="searchCompaniesFilter.searchNit"
+                (keydown.enter)="searchCompanies()">
+            </div>
+          </th>
+          <th class="colWidth tableStyle" scope="col">
+            <div class="searchBar">
+              <input type="text" class="form-control" placeholder="Cod. Grupo"
+                [(ngModel)]="searchCompaniesFilter.searchCodGrupo" (keydown.enter)="searchCompanies()">
+            </div>
+          </th>
+          <th class="colWidth tableStyle" scope="col">
+            <div class="searchBar input-group">
+              <input style="border-radious: 4px;" type="text" class="form-control" placeholder="aaaa-mm-dd"
+                [(ngModel)]="model" (keydown.enter)="searchCompanies()" ngbDatepicker #d="ngbDatepicker" />
+              <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"
+                style="border-radius: 4px;"></button>
+            </div>
+          </th>
+
+        </tr>
+      </thead>
+      <tbody>
+        @for(table of firstTable; track $index){
+        <tr>
+          <td class="colWidth tableStyle">
+            <app-add-update-company [btnType]="'changeDate'" [company]="table"></app-add-update-company>
+            <button class="roundBtn gray_bgd" (click)="goToClients(table)" ngbTooltip="Colaboradores" placement="top">
+              <i class="bi bi-people"></i>
+            </button>
+            <app-add-update-company [btnType]="'update'" [company]="table"
+              (companyCreated)="getAllCompanies()"></app-add-update-company>
+            <app-delete-company [company]="table" (companyDeleted)="getAllCompanies()"></app-delete-company>
+          </td>
+          <td class="colWidth tableStyle">{{table.nombreEmpresa}}</td>
+          <td class="colWidth tableStyle">{{table.nit}}</td>
+          <td class="colWidth tableStyle">{{table.codGrupo}}</td>
+          <td class="colWidth tableStyle">{{table.fechaCorte | date:'yyyy-MM-dd' }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+}

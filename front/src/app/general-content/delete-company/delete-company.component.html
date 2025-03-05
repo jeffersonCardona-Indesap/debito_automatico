@@ -1,0 +1,34 @@
+<app-alerts [messageType]="messageType" [messageContent]="messageContent"></app-alerts>
+
+<button type="button" class="roundBtn red_bgd" (click)="open(deleteModal)" ngbTooltip="Eliminar Empresa" placement="top">
+  <i class="bi bi-trash"></i>
+</button>
+
+<ng-template #deleteModal let-modal>
+  <div #deleteModal class="modal-content">
+    <div class="modal-header">
+      <span>
+        Eliminar Empresa
+      </span>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Close click')">
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>
+        Usted está a punto de borrar la información de la empresa
+        <strong>
+          {{company.nombreEmpresa}}
+        </strong>.
+        Si está seguro de eliminar la empresa, por favor presione el botón de <strong>Aceptar</strong>.
+      </p>
+    </div>
+    <div class="modal-footer">
+      <div class="d-flex justify-content-end align-items-center">
+        <button class="red_bgd roundBtn" (click)="modal.close('Close click')"> Cancelar</button>
+        <button class="green_bgd roundBtn" (click)="deleteCompany()">
+          Aceptar
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>

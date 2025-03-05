@@ -1,0 +1,8 @@
+
+
+@if (messageType) {
+  <div class="alertMessage">
+    <ngb-alert #selfClosingAlert type="{{messageType}}" (closed)="successMessage = ''">{{messageContent}}</ngb-alert>
+  </div>
+
+}
