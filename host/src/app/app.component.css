@@ -1,0 +1,27 @@
+
+.container{
+  margin: 10px auto;
+
+}
+.sideBar{
+  min-height: 100vh;
+  height: auto;
+  border: 1px solid #58585A;
+  border-radius: 4px;
+  align-content: center;
+}
+.generalContent{
+  min-height: 100vh;
+  height: auto;
+  border: 1px solid #58585A;
+  border-radius: 4px;
+}
+
+.debitButton{
+  width: 90%;
+  padding: 10px;
+  border: none;
+  background-color: #008E4F;
+  color: white;
+  border-radius: 8px;
+}
